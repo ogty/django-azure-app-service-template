@@ -23,14 +23,14 @@ migrate:
 
 startproject:
 	@django-admin startproject $(project_name) .                                       \
-    && sed -e 's/<project-name>/$(project_name)/g' ./manage.tpl > manage.bak           \
-    && mv manage.bak manage.py                                                         \
-    && sed -e 's/<project-name>/$(project_name)/g' ./production.tpl > ./production.bak \
-    && mv ./production.bak ./production.py                                             \
-    && mv ./production.py ./$(project_name)                                            \
-    && sed -e 's/<project-name>/$(project_name)/g' ./wsgi.tpl > ./wsgi.bak             \
-    && mv ./wsgi.bak ./wsgi.py                                                         \
-    && mv ./wsgi.py ./$(project_name)                                                  \
+	&& sed -e 's/<project-name>/$(project_name)/g' ./manage.tpl > manage.bak           \
+	&& mv manage.bak manage.py                                                         \
+	&& sed -e 's/<project-name>/$(project_name)/g' ./production.tpl > ./production.bak \
+	&& mv ./production.bak ./production.py                                             \
+	&& mv ./production.py ./$(project_name)                                            \
+	&& sed -e 's/<project-name>/$(project_name)/g' ./wsgi.tpl > ./wsgi.bak             \
+	&& mv ./wsgi.bak ./wsgi.py                                                         \
+	&& mv ./wsgi.py ./$(project_name)                                                  \
 	&& echo "\nSTATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)" >> ./$(project_name)/settings.py
 
 startapp:
@@ -44,22 +44,22 @@ createsuperuser:
 
 create:
 	@az webapp up                   \
-        --runtime PYTHON:$(version) \
-        --sku $(plan)               \
-        --logs                      \
-        --name $(application_name)  \
-        --resource-group $(resource_group_name)
+		--runtime PYTHON:$(version) \
+		--sku $(plan)               \
+		--logs                      \
+		--name $(application_name)  \
+		--resource-group $(resource_group_name)
 
 setting:
 	@az webapp config appsettings set           \
-        --resource-group $(resource_group_name) \
-        --name $(application_name)              \
-        --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
+		--resource-group $(resource_group_name) \
+		--name $(application_name)              \
+		--settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
 
 deploy:
 	@zip -r $(zip_file_name).zip . -x '.??*'    \
-    && az webapp deploy                         \
-        --name $(application_name)              \
-        --resource-group $(resource_group_name) \
-        --src-path $(zip_file_name).zip         \
-        --type zip
+	&& az webapp deploy                         \
+		--name $(application_name)              \
+		--resource-group $(resource_group_name) \
+		--src-path $(zip_file_name).zip         \
+		--type zip
