@@ -2,9 +2,9 @@ app_name            ?=
 project_name        ?= 
 plan                := B1
 version             := 3.9
-zip_file_name       := <zip-file-name>
-application_name    := <application-name>
-resource_group_name := <resource-group-name>
+zip_file_name       := 
+application_name    := 
+resource_group_name := 
 
 run:
 	@python manage.py runserver
@@ -22,15 +22,19 @@ migrate:
 	@python manage.py migrate
 
 startproject:
-	@django-admin startproject $(project_name) .                                       \
-	&& sed -e 's/<project-name>/$(project_name)/g' ./manage.tpl > manage.bak           \
-	&& mv manage.bak manage.py                                                         \
-	&& sed -e 's/<project-name>/$(project_name)/g' ./production.tpl > ./production.bak \
-	&& mv ./production.bak ./production.py                                             \
-	&& mv ./production.py ./$(project_name)                                            \
-	&& sed -e 's/<project-name>/$(project_name)/g' ./wsgi.tpl > ./wsgi.bak             \
-	&& mv ./wsgi.bak ./wsgi.py                                                         \
-	&& mv ./wsgi.py ./$(project_name)                                                  \
+	@django-admin startproject $(project_name) .                                        \
+	&& sed -e 's/<project-name>/$(project_name)/g' ./manage.tpl > manage.bak            \
+	&& mv manage.bak manage.py                                                          \
+	&& sed -e 's/<project-name>/$(project_name)/g' ./production.tpl > ./production.bak  \
+	&& mv ./production.bak ./production.py                                              \
+	&& mv ./production.py ./$(project_name)                                             \
+	&& sed -e 's/<project-name>/$(project_name)/g' ./wsgi.tpl > ./wsgi.bak              \
+	&& mv ./wsgi.bak ./wsgi.py                                                          \
+	&& mv ./wsgi.py ./$(project_name)                                                   \
+	&& sed -e "s/^        'DIRS': \[\],/\t\t'DIRS': \[BASE_DIR \/ 'templates'\],/g"     \
+	./$(project_name)/settings.py                                                       \
+	> ./$(project_name)/settings.bak                                                    \
+	&& mv ./$(project_name)/settings.bak ./$(project_name)/settings.py                  \
 	&& echo "\nSTATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)" >> ./$(project_name)/settings.py
 
 startapp:
