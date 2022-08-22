@@ -1,8 +1,8 @@
 <h1 align="center">Django × Azure App Service Template</h1>
 
 <div align="center">
-    <img src="https://icon-library.com/images/django-icon/django-icon-0.jpg" width="35%" height="35%">
-    <img src="./app-services.svg" width="35%" height="35%">
+    <img src="https://icon-library.com/images/django-icon/django-icon-0.jpg" width="30%" height="30%">
+    <img src="./app-services.svg" width="30%" height="30%">
 </div>
 
 ## Setup
