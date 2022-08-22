@@ -31,3 +31,11 @@ $ make startproject project_name='<project-name>'
 3. `make deploy`
 
 Only run #3 when updating the application in the future.
+
+> **Warning**  
+> Do not interchange the order of `STATICFIELS_DIRS` and `STATIC_URL` in `settings.py`.  
+> If you do, an error will occur with `DEBUG = False`.
+> ```python
+> STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
+> STATIC_URL = 'static/'
+> ```
