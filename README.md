@@ -9,7 +9,7 @@ $ make setup
 $ make startproject project_name='<project-name>'
 ```
 
-> **Note** 
+> **Note**  
 > It is recommended to create an `activate` command in `alias`.
 > ```zsh 
 > $ alias activate='source ./.venv/bin/activate' 
