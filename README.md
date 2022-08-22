@@ -1,5 +1,9 @@
 <h1 align="center">Django × Azure App Service Template</h1>
 
+<p align="center">
+    Created based on <a href="https://docs.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=flask%2Cwindows%2Cazure-cli%2Cvscode-deploy%2Cdeploy-instructions-azportal%2Cterminal-bash%2Cdeploy-instructions-zip-azcli">Quick Start</a>
+</p>
+
 <div align="center">
     <img src="https://icon-library.com/images/django-icon/django-icon-0.jpg" width="30%" height="30%">
     <img src="./app-services.svg" width="30%" height="30%">
