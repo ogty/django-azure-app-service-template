@@ -32,10 +32,11 @@ startproject:
 	&& mv ./wsgi.bak ./wsgi.py                                                          \
 	&& mv ./wsgi.py ./$(project_name)                                                   \
 	&& sed -e "s/^        'DIRS': \[\],/\t\t'DIRS': \[BASE_DIR \/ 'templates'\],/g"     \
-	./$(project_name)/settings.py                                                       \
-	> ./$(project_name)/settings.bak                                                    \
+	./$(project_name)/settings.py > ./$(project_name)/settings.bak                      \
 	&& mv ./$(project_name)/settings.bak ./$(project_name)/settings.py                  \
-	&& echo "\nSTATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)" >> ./$(project_name)/settings.py
+    && sed -e "s/^STATIC_URL = 'static\/'/STATICFILES_DIRS = \(str\(BASE_DIR.joinpath\('static'\)\),\)\nSTATIC_URL = 'static\/'/g" \
+    ./$(project_name)/settings.py > ./$(project_name)/settings.bak                      \
+	&& mv ./$(project_name)/settings.bak ./$(project_name)/settings.py
 
 startapp:
 	@python manage.py startapp $(app_name)
