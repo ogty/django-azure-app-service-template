@@ -1,4 +1,9 @@
-# Django × Azure App Service Template Repository
+<h1 align="center">Django × Azure App Service Template</h1>
+
+<div align="center">
+    <img src="https://icon-library.com/images/django-icon/django-icon-0.jpg" width="45%" height="45%">
+    <img src="./app-services.svg" width="45%" height="45%">
+</div>
 
 ## Setup
 
