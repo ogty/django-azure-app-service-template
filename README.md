@@ -39,3 +39,7 @@ Only run #3 when updating the application in the future.
 > STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
 > STATIC_URL = 'static/'
 > ```
+
+## Using PostgreSQL
+
+TODO
