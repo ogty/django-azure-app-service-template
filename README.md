@@ -23,7 +23,7 @@ $ make startproject project_name='<project-name>'
 ## Deployment Steps
 
 1. `make create`
-2. `make setting`
+2. `make config`
 3. `make deploy`
 
 Only run #3 when updating the application in the future.

@@ -50,7 +50,7 @@ create:
 		--name $(application_name)  \
 		--resource-group $(resource_group_name)
 
-setting:
+config:
 	@az webapp config appsettings set           \
 		--resource-group $(resource_group_name) \
 		--name $(application_name)              \
