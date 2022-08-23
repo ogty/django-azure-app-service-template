@@ -42,6 +42,31 @@ Only run #3 when updating the application in the future.
 
 ## Using PostgreSQL
 
+**`settings.py`**
+
+```python
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+...
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DBNAME'],
+        'HOST': os.environ['DBHOST'],
+        'USER': os.environ['DBUSER'],
+        'PASSWORD': os.environ['DBPASS'] 
+    }
+}
+```
+
+> **Note**  
+> comment out 
+
 ```zsh
 $ brew install postgresql
 $ make local-db-setup
