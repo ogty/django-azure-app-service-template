@@ -6,7 +6,7 @@ project_name          ?=
 POSTGRES_PLAN         := Standard_B1ms
 PLAN                  := B1
 VERSION               := 3.9
-LOCATION 		      := eastus
+LOCATION              := eastus
 ZIP_FILE_NAME         := content
 APP_SERVICE_PLAN_NAME := 
 RESOURCE_GROUP_NAME   := 
@@ -14,7 +14,7 @@ APPLICATION_NAME      :=
 DB_SERVER_NAME        := 
 DBNAME                :=
 GLOBAL_IP_ADDRESS     := $(curl ipecho.net/plain; echo)
-DBUSER			      := $(whoami)  # User name you are logged in as by default
+DBUSER                := $(whoami)  # User name you are logged in as by default
 START_IP_ADDRESS      := 0.0.0.0    # Warning: Use Azure Virtual Network for production deployments
 END_IP_ADDRESS        := 0.0.0.0    # Warning: Use Azure Virtual Network for production deployments
 
@@ -47,8 +47,8 @@ startproject:
 	&& sed -e "s/^        'DIRS': \[\],/\t\t'DIRS': \[BASE_DIR \/ 'templates'\],/g"     \
 	./$(project_name)/settings.py > ./$(project_name)/settings.bak                      \
 	&& mv ./$(project_name)/settings.bak ./$(project_name)/settings.py                  \
-    && sed -e "s/^STATIC_URL = 'static\/'/STATICFILES_DIRS = \(str\(BASE_DIR.joinpath\('static'\)\),\)\nSTATIC_URL = 'static\/'/g" \
-    ./$(project_name)/settings.py > ./$(project_name)/settings.bak                      \
+	&& sed -e "s/^STATIC_URL = 'static\/'/STATICFILES_DIRS = \(str\(BASE_DIR.joinpath\('static'\)\),\)\nSTATIC_URL = 'static\/'/g" \
+	./$(project_name)/settings.py > ./$(project_name)/settings.bak                      \
 	&& mv ./$(project_name)/settings.bak ./$(project_name)/settings.py
 
 # $ make startapp app_name=<name>
@@ -90,19 +90,19 @@ group-create:
 
 plan-create:
 	@az appservice plan create                  \
-    	--name $(APP_SERVICE_PLAN_NAME)         \
-    	--resource-group $(RESOURCE_GROUP_NAME) \
-    	--sku $(PLAN)                           \
-    	--is-linux
+		--name $(APP_SERVICE_PLAN_NAME)         \
+		--resource-group $(RESOURCE_GROUP_NAME) \
+		--sku $(PLAN)                           \
+		--is-linux
 
 app-create:
 	@az webapp create                           \
-    	--name $(APPLICATION_NAME)              \
-    	--runtime 'PYTHON|$(VERSION)'           \
-    	--plan $(APP_SERVICE_PLAN_NAME)         \
-    	--resource-group $(RESOURCE_GROUP_NAME) \
-    	--query 'defaultHostName'               \
-    	--output table
+		--name $(APPLICATION_NAME)              \
+		--runtime 'PYTHON|$(VERSION)'           \
+		--plan $(APP_SERVICE_PLAN_NAME)         \
+		--resource-group $(RESOURCE_GROUP_NAME) \
+		--query 'defaultHostName'               \
+		--output table
 
 # $ make postgres-create admin_username=<username> admin_password=<password>
 postgres-create:
