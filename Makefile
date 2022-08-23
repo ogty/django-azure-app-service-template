@@ -153,3 +153,7 @@ postgres-config-set:
 		--resource-group $(RESOURCE_GROUP_NAME) \
 		--name $(APPLICATION_NAME)              \
 		--settings DBHOST=$(DB_SERVER_NAME) DBNAME=$(DBNAME) DBUSER=$(admin_username) DBPASS=$(admin_password)
+
+ssh:
+	@az webapp ssh --resource-group $(RESOURCE_GROUP_NAME) \
+		--name $(APPLICATION_NAME)
