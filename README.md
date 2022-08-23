@@ -55,3 +55,16 @@ DBNAME='<database-name>'
 DBUSER='<logged-in-user-name>'
 DBPASS=''
 ```
+
+```zsh
+$ make group-create
+$ make plan-create
+$ make app-create
+$ make postgres-create admin_username='<username>' admin_password='<password>'
+$ make rule-create
+$ make postgres-show
+$ make postgres-connect admin_username='<username>'
+$ make server-rule-create
+$ make postgres-config-set admin_username='<username>' admin_password='<password>'
+$ make deploy
+```
