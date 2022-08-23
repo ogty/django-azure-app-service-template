@@ -14,7 +14,6 @@ APPLICATION_NAME      :=
 DB_SERVER_NAME        := 
 DBNAME                :=
 GLOBAL_IP_ADDRESS     := $(curl ipecho.net/plain; echo)
-DBUSER                := $(whoami)  # User name you are logged in as by default
 START_IP_ADDRESS      := 0.0.0.0    # Warning: Use Azure Virtual Network for production deployments
 END_IP_ADDRESS        := 0.0.0.0    # Warning: Use Azure Virtual Network for production deployments
 
@@ -22,7 +21,7 @@ run:
 	@python manage.py runserver
 
 install:
-	@brew install azure-cli
+	@brew install azure-cli postgres
 
 setup:
 	@python3 -m venv .venv         \
@@ -82,6 +81,10 @@ deploy:
 		--resource-group $(RESOURCE_GROUP_NAME) \
 		--src-path $(ZIP_FILE_NAME).zip         \
 		--type zip
+
+local-db-setup:
+	@brew services start postgresql \
+	&& psql postgres -c "CREATE DATABASE $(DBNAME);"
 
 group-create:
 	@az group create           \
