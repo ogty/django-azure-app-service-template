@@ -99,3 +99,7 @@ PostgreSQL Flexible server > PostgreSQL Flexible server > Checkbox > Save
 $ make ssh
 # python manage.py migrate
 ```
+
+```zsh
+make group-create && make plan-create && make app-create && make postgres-create && make rule-create && make postgres-show && make postgres-connect && make config-set && make deploy
+```
