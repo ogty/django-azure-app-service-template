@@ -64,7 +64,13 @@ $ make postgres-create admin_username='<username>' admin_password='<password>'
 $ make rule-create
 $ make postgres-show
 $ make postgres-connect admin_username='<username>'
-$ make server-rule-create
-$ make postgres-config-set admin_username='<username>' admin_password='<password>'
+$ make config-set
 $ make deploy
+```
+
+PostgreSQL Flexible server > PostgreSQL Flexible server > Checkbox > Save
+
+```zsh
+$ make ssh
+# python manage.py migrate
 ```
