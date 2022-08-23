@@ -34,20 +34,20 @@ migrate:
 
 # $ make startproject project_name=<name>
 startproject:
-	@django-admin startproject $(project_name) .                                        \
-	&& sed -e 's/<project-name>/$(project_name)/g' ./manage.tpl > manage.bak            \
-	&& mv manage.bak manage.py                                                          \
-	&& sed -e 's/<project-name>/$(project_name)/g' ./production.tpl > ./production.bak  \
-	&& mv ./production.bak ./production.py                                              \
-	&& mv ./production.py ./$(project_name)                                             \
-	&& sed -e 's/<project-name>/$(project_name)/g' ./wsgi.tpl > ./wsgi.bak              \
-	&& mv ./wsgi.bak ./wsgi.py                                                          \
-	&& mv ./wsgi.py ./$(project_name)                                                   \
-	&& sed -e "s/^        'DIRS': \[\],/\t\t'DIRS': \[BASE_DIR \/ 'templates'\],/g"     \
-	./$(project_name)/settings.py > ./$(project_name)/settings.bak                      \
-	&& mv ./$(project_name)/settings.bak ./$(project_name)/settings.py                  \
+	@django-admin startproject $(project_name) .                                       \
+	&& sed -e 's/<project-name>/$(project_name)/g' ./manage.tpl > manage.bak           \
+	&& mv manage.bak manage.py                                                         \
+	&& sed -e 's/<project-name>/$(project_name)/g' ./production.tpl > ./production.bak \
+	&& mv ./production.bak ./production.py                                             \
+	&& mv ./production.py ./$(project_name)                                            \
+	&& sed -e 's/<project-name>/$(project_name)/g' ./wsgi.tpl > ./wsgi.bak             \
+	&& mv ./wsgi.bak ./wsgi.py                                                         \
+	&& mv ./wsgi.py ./$(project_name)                                                  \
+	&& sed -e "s/^        'DIRS': \[\],/\t\t'DIRS': \[BASE_DIR \/ 'templates'\],/g"    \
+	./$(project_name)/settings.py > ./$(project_name)/settings.bak                     \
+	&& mv ./$(project_name)/settings.bak ./$(project_name)/settings.py                 \
 	&& sed -e "s/^STATIC_URL = 'static\/'/STATICFILES_DIRS = \(str\(BASE_DIR.joinpath\('static'\)\),\)\nSTATIC_URL = 'static\/'/g" \
-	./$(project_name)/settings.py > ./$(project_name)/settings.bak                      \
+	./$(project_name)/settings.py > ./$(project_name)/settings.bak                     \
 	&& mv ./$(project_name)/settings.bak ./$(project_name)/settings.py
 
 # $ make startapp app_name=<name>
