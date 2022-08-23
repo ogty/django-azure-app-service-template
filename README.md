@@ -26,8 +26,8 @@ $ make startproject project_name='<project-name>'
 
 ## Deployment Steps
 
-1. `make create`
-2. `make config`
+1. `make app-up`
+2. `make config-set`
 3. `make deploy`
 
 Only run #3 when updating the application in the future.
@@ -42,4 +42,16 @@ Only run #3 when updating the application in the future.
 
 ## Using PostgreSQL
 
-TODO
+```zsh
+$ brew install postgresql
+$ make local-db-setup
+```
+
+**`.env`**
+
+```
+DBHOST='localhost'
+DBNAME='<database-name>'
+DBUSER='<logged-in-user-name>'
+DBPASS=''
+```
