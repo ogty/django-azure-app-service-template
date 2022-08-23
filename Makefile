@@ -136,7 +136,8 @@ postgres-connect:
 	@psql --host=$(DB_SERVER_NAME).postgres.database.azure.com \
 		--port=5432                                            \
 		--username=$(admin_username)                           \
-		--dbname=postgres
+		--dbname=postgres                                      \
+		-c "CREATE DATABASE $(DBNAME);"
 
 server-rule-create:
 	@az postgres server firewall-rule create    \
