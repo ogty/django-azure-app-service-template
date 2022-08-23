@@ -1,5 +1,5 @@
 admin_password        ?= 
-admin_username        ?=
+admin_username        ?= 
 app_name              ?= 
 project_name          ?= 
 
@@ -12,7 +12,7 @@ APP_SERVICE_PLAN_NAME :=
 RESOURCE_GROUP_NAME   := 
 APPLICATION_NAME      := 
 DB_SERVER_NAME        := 
-DBNAME                :=
+DBNAME                := 
 GLOBAL_IP_ADDRESS     := $(curl ipecho.net/plain; echo)
 START_IP_ADDRESS      := 0.0.0.0    # Warning: Use Azure Virtual Network for production deployments
 END_IP_ADDRESS        := 0.0.0.0    # Warning: Use Azure Virtual Network for production deployments
