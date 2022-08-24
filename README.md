@@ -105,7 +105,7 @@ make group-create && make plan-create && make app-create && make postgres-create
 
 </details>
 
-PostgreSQL Flexible server > PostgreSQL Flexible server > Checkbox > Save
+PostgreSQL Flexible server > Checkbox > Save
 
 ```zsh
 $ make ssh
