@@ -159,4 +159,4 @@ ssh:
 		--name $(APPLICATION_NAME)
 
 list:
-	@awk '/^[-a-z]{1,}:$$/ {split($$0, a, ":"); print(a[1]);}' Makefile
+	@awk '/^[-a-z]{1,}:$$/ {split($$0, a, ":"); printf("- %s\n", a[1]);}' Makefile
