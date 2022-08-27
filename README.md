@@ -102,6 +102,10 @@ $ make ssh
 - setup
 - migrate
 - startproject
+
+<details>
+  <summary>...</summary>
+
 - startapp
 - makemigrations
 - createsuperuser
@@ -120,3 +124,5 @@ $ make ssh
 - ssh
 - list
 - db-deploy
+
+</details>
