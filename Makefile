@@ -157,3 +157,6 @@ postgres-config-set:
 ssh:
 	@az webapp ssh --resource-group $(RESOURCE_GROUP_NAME) \
 		--name $(APPLICATION_NAME)
+
+list:
+	@awk '/^[-a-z]{1,}:$$/ {split($$0, a, ":"); print(a[1]);}' Makefile
