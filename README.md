@@ -82,28 +82,11 @@ DBPASS=''
 ```
 
 ```zsh
-$ make group-create
-$ make plan-create
-$ make app-create
-$ make postgres-create admin_username='<username>' admin_password='<password>'
-$ make rule-create
-$ make postgres-show
-$ make postgres-connect admin_username='<username>'
-$ make config-set
-$ make deploy
-```
-
-<details>
-<summary>For Copying</summary>
-
-```zsh
-make group-create && make plan-create && make app-create && make postgres-create && make rule-create && make postgres-show && make postgres-connect && make config-set && make deploy
+$ make db-deploy
 ```
 
 > **Note**  
 > It is assumed that all variables in the Makefile have already been entered.
-
-</details>
 
 PostgreSQL Flexible server > Checkbox > Save
 
