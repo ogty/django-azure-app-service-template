@@ -160,3 +160,14 @@ ssh:
 
 list:
 	@awk '/^[-a-z]{1,}:$$/ {split($$0, a, ":"); printf("- %s\n", a[1]);}' Makefile
+
+db-deploy:
+	@make group-create       \
+	&& make plan-create      \
+	&& make app-create       \
+	&& make postgres-create  \
+	&& make rule-create      \
+	&& make postgres-show    \
+	&& make postgres-connect \
+	&& make config-set       \
+	&& make deploy
