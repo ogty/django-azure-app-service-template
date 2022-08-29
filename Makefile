@@ -62,25 +62,25 @@ createsuperuser:
 
 app-up:
 	@az webapp up                   \
-		--runtime PYTHON:$(VERSION) \
-		--sku $(PLAN)               \
-		--logs                      \
-		--name $(APPLICATION_NAME)  \
-		--resource-group $(RESOURCE_GROUP_NAME)
+	    --runtime PYTHON:$(VERSION) \
+	    --sku $(PLAN)               \
+	    --logs                      \
+	    --name $(APPLICATION_NAME)  \
+	    --resource-group $(RESOURCE_GROUP_NAME)
 
 config-set:
 	@az webapp config appsettings set           \
-		--resource-group $(RESOURCE_GROUP_NAME) \
-		--name $(APPLICATION_NAME)              \
-		--settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
+	    --resource-group $(RESOURCE_GROUP_NAME) \
+	    --name $(APPLICATION_NAME)              \
+	    --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
 
 deploy:
 	@zip -r $(ZIP_FILE_NAME).zip . -x '.??*'    \
 	&& az webapp deploy                         \
-		--name $(APPLICATION_NAME)              \
-		--resource-group $(RESOURCE_GROUP_NAME) \
-		--src-path $(ZIP_FILE_NAME).zip         \
-		--type zip
+	    --name $(APPLICATION_NAME)              \
+	    --resource-group $(RESOURCE_GROUP_NAME) \
+	    --src-path $(ZIP_FILE_NAME).zip         \
+	    --type zip
 
 local-db-setup:
 	@brew services start postgresql \
@@ -88,78 +88,83 @@ local-db-setup:
 
 group-create:
 	@az group create           \
-		--location $(LOCATION) \
-		--name $(RESOURCE_GROUP_NAME)
+	    --location $(LOCATION) \
+	    --name $(RESOURCE_GROUP_NAME)
 
 plan-create:
 	@az appservice plan create                  \
-		--name $(APP_SERVICE_PLAN_NAME)         \
-		--resource-group $(RESOURCE_GROUP_NAME) \
-		--sku $(PLAN)                           \
-		--is-linux
+	    --name $(APP_SERVICE_PLAN_NAME)         \
+	    --resource-group $(RESOURCE_GROUP_NAME) \
+	    --sku $(PLAN)                           \
+	    --is-linux
 
 app-create:
 	@az webapp create                           \
-		--name $(APPLICATION_NAME)              \
-		--runtime 'PYTHON|$(VERSION)'           \
-		--plan $(APP_SERVICE_PLAN_NAME)         \
-		--resource-group $(RESOURCE_GROUP_NAME) \
-		--query 'defaultHostName'               \
-		--output table
+	    --name $(APPLICATION_NAME)              \
+	    --runtime 'PYTHON|$(VERSION)'           \
+	    --plan $(APP_SERVICE_PLAN_NAME)         \
+	    --resource-group $(RESOURCE_GROUP_NAME) \
+	    --query 'defaultHostName'               \
+	    --output table
 
 # $ make postgres-create admin_username=<username> admin_password=<password>
 postgres-create:
 	@az postgres flexible-server create         \
-		--resource-group $(RESOURCE_GROUP_NAME) \
-		--name $(DB_SERVER_NAME)                \
-		--location $(LOCATION)                  \
-		--admin-user $(admin_username)          \
-		--admin-password $(admin_password)      \
-		--public-access None                    \
-		--sku-name $(POSTGRES_PLAN)             \
-		--tier Burstable
+	    --resource-group $(RESOURCE_GROUP_NAME) \
+	    --name $(DB_SERVER_NAME)                \
+	    --location $(LOCATION)                  \
+	    --admin-user $(admin_username)          \
+	    --admin-password $(admin_password)      \
+	    --public-access None                    \
+	    --sku-name $(POSTGRES_PLAN)             \
+	    --tier Burstable
 
 rule-create:
 	@az postgres flexible-server firewall-rule create \
-		--resource-group $(RESOURCE_GROUP_NAME)       \
-		--name $(DB_SERVER_NAME)                      \
-		--rule-name AllowMyIP                         \
-		--start-ip-address $(GLOBAL_IP_ADDRESS)       \
-		--end-ip-address $(GLOBAL_IP_ADDRESS)
+	    --resource-group $(RESOURCE_GROUP_NAME)       \
+	    --name $(DB_SERVER_NAME)                      \
+	    --rule-name AllowMyIP                         \
+	    --start-ip-address $(GLOBAL_IP_ADDRESS)       \
+	    --end-ip-address $(GLOBAL_IP_ADDRESS)
 
 postgres-show:
 	@az postgres flexible-server show \
-		--name $(DB_SERVER_NAME)      \
-		--resource-group $(RESOURCE_GROUP_NAME)
+	    --name $(DB_SERVER_NAME)      \
+	    --resource-group $(RESOURCE_GROUP_NAME)
 
 postgres-connect:
 	@psql --host=$(DB_SERVER_NAME).postgres.database.azure.com \
-		--port=5432                                            \
-		--username=$(admin_username)                           \
-		--dbname=postgres                                      \
-		-c "CREATE DATABASE $(DBNAME);"
+	    --port=5432                                            \
+	    --username=$(admin_username)                           \
+	    --dbname=postgres                                      \
+	    -c "CREATE DATABASE $(DBNAME);"
 
 server-rule-create:
 	@az postgres server firewall-rule create    \
-		--resource-group $(RESOURCE_GROUP_NAME) \
-		--server $(DB_SERVER_NAME)              \
-		--name AllowAllWindowsAzureIps          \
-		--start-ip-address $(START_IP_ADDRESS)  \
-		--end-ip-address $(END_IP_ADDRESS)
+	    --resource-group $(RESOURCE_GROUP_NAME) \
+	    --server $(DB_SERVER_NAME)              \
+	    --name AllowAllWindowsAzureIps          \
+	    --start-ip-address $(START_IP_ADDRESS)  \
+	    --end-ip-address $(END_IP_ADDRESS)
 
 # $ make postgres-config-set admin_username=<username> admin_password=<password>
 postgres-config-set:
 	@az webapp config appsettings set           \
-		--resource-group $(RESOURCE_GROUP_NAME) \
-		--name $(APPLICATION_NAME)              \
-		--settings DBHOST=$(DB_SERVER_NAME) DBNAME=$(DBNAME) DBUSER=$(admin_username) DBPASS=$(admin_password)
+	    --resource-group $(RESOURCE_GROUP_NAME) \
+	    --name $(APPLICATION_NAME)              \
+	    --settings DBHOST=$(DB_SERVER_NAME) DBNAME=$(DBNAME) DBUSER=$(admin_username) DBPASS=$(admin_password)
 
 ssh:
 	@az webapp ssh --resource-group $(RESOURCE_GROUP_NAME) \
-		--name $(APPLICATION_NAME)
+	    --name $(APPLICATION_NAME)
 
 list:
-	@awk '/^[-a-z]{1,}:$$/ {split($$0, a, ":"); printf("- %s\n", a[1]);}' Makefile
+	@awk '                          \
+	    /^[-a-z]{1,}:$$/ {          \
+	        split($$0, a, ":");     \
+	        printf("- %s\n", a[1]); \
+	    }                           \
+	' Makefile
 
 db-deploy:
 	@make group-create       \
