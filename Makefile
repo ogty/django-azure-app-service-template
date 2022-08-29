@@ -1,7 +1,7 @@
 admin_password        ?= 
 admin_username        ?= 
-app_name              ?= 
 project_name          ?= 
+app_name              ?= 
 
 END_IP_ADDRESS        := 0.0.0.0  # Warning: Use Azure Virtual Network for production deployments
 START_IP_ADDRESS      := 0.0.0.0  # Warning: Use Azure Virtual Network for production deployments
@@ -14,14 +14,14 @@ VERSION               := $(shell curl -s https://www.python.org/downloads/ | awk
                             }                                                      \
                         ')
 POSTGRES_PLAN         := Standard_B1ms
-PLAN                  := B1
-LOCATION              := eastus
 ZIP_FILE_NAME         := content
-APP_SERVICE_PLAN_NAME := 
-RESOURCE_GROUP_NAME   := 
-APPLICATION_NAME      := 
-DB_SERVER_NAME        := 
+LOCATION              := eastus
+PLAN                  := B1
 DBNAME                := 
+DB_SERVER_NAME        := 
+APPLICATION_NAME      := 
+RESOURCE_GROUP_NAME   := 
+APP_SERVICE_PLAN_NAME := 
 
 run:
 	@python manage.py runserver
