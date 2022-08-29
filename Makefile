@@ -8,11 +8,11 @@ START_IP_ADDRESS      := 0.0.0.0  # Warning: Use Azure Virtual Network for produ
 GLOBAL_IP_ADDRESS     := $(shell curl -s ipecho.net/plain; echo)
 VERSION               := $(shell curl -s https://www.python.org/downloads/ | awk ' \
                             /\<p\>Download the lates/ {                            \
-						        split($$0, a, "/Python");                          \
-						        split(a[1], a, "python/");                         \
-						        print(a[2]);                                       \
-						    }                                                      \
-						')
+                                split($$0, a, "/Python");                          \
+                                split(a[1], a, "python/");                         \
+                                print(a[2]);                                       \
+                            }                                                      \
+                        ')
 POSTGRES_PLAN         := Standard_B1ms
 PLAN                  := B1
 LOCATION              := eastus
