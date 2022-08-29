@@ -144,8 +144,8 @@ server-rule-create:
 		--resource-group $(RESOURCE_GROUP_NAME) \
 		--server $(DB_SERVER_NAME)              \
 		--name AllowAllWindowsAzureIps          \
-		--start-ip-address 0.0.0.0              \
-		--end-ip-address 0.0.0.0
+		--start-ip-address $(START_IP_ADDRESS)  \
+		--end-ip-address $(END_IP_ADDRESS)
 
 # $ make postgres-config-set admin_username=<username> admin_password=<password>
 postgres-config-set:
