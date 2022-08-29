@@ -3,9 +3,18 @@ admin_username        ?=
 app_name              ?= 
 project_name          ?= 
 
+END_IP_ADDRESS        := 0.0.0.0  # Warning: Use Azure Virtual Network for production deployments
+START_IP_ADDRESS      := 0.0.0.0  # Warning: Use Azure Virtual Network for production deployments
+GLOBAL_IP_ADDRESS     := $(shell curl -s ipecho.net/plain; echo)
+VERSION               := $(shell curl -s https://www.python.org/downloads/ | awk ' \
+                            /\<p\>Download the lates/ {                            \
+						        split($$0, a, "/Python");                          \
+						        split(a[1], a, "python/");                         \
+						        print(a[2]);                                       \
+						    }                                                      \
+						')
 POSTGRES_PLAN         := Standard_B1ms
 PLAN                  := B1
-VERSION               := 3.9
 LOCATION              := eastus
 ZIP_FILE_NAME         := content
 APP_SERVICE_PLAN_NAME := 
@@ -13,9 +22,6 @@ RESOURCE_GROUP_NAME   :=
 APPLICATION_NAME      := 
 DB_SERVER_NAME        := 
 DBNAME                := 
-GLOBAL_IP_ADDRESS     := $(curl ipecho.net/plain; echo)
-START_IP_ADDRESS      := 0.0.0.0    # Warning: Use Azure Virtual Network for production deployments
-END_IP_ADDRESS        := 0.0.0.0    # Warning: Use Azure Virtual Network for production deployments
 
 run:
 	@python manage.py runserver

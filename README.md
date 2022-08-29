@@ -126,7 +126,3 @@ $ make ssh
 - db-deploy
 
 </details>
-
-```
-wget https://www.python.org/downloads/ -q -O - | awk '/\<p\>Download the lates/{split($0,a,"/Python");split(a[1],a,"python/");print(a[2])}'
-```
